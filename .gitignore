@@ -1,0 +1,9 @@
+
+venv
+venv_test
+emeki.egg-info
+dist 
+build
+
+*__pycache__*
+*.pyc
