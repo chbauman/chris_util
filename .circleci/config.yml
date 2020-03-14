@@ -1,0 +1,27 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+        name: install python dependencies
+        command: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install pytest-cov
+      - run:
+        name: run tests
+        command: |
+          . venv/bin/activate
+          pytest tests
+          
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
