@@ -17,5 +17,8 @@ class TestUtil(TestCase):
     def test_str_to_bool_ex(self):
         with self.assertRaises(ValueError):
             str2bool(2)
+            
+    def test_fail(self):
+        assert False, "Expected failure"
 
     pass
