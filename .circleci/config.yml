@@ -39,8 +39,8 @@ jobs:
           name: format and run tests
           command: |
             . venv/bin/activate
-            black emeki
-            black tests
+            black --check emeki
+            black --check tests
             pytest tests
   deploy:
     docker:
