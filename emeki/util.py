@@ -12,9 +12,10 @@ def str2bool(v) -> bool:
     """
     if isinstance(v, bool):
         return v
-    if v.lower() in ('yes', 'true', 't', 'y', '1', '1.0'):
-        return True
-    elif v.lower() in ('no', 'false', 'f', 'n', '0', '0.0'):
-        return False
-    else:
-        raise ValueError(f"Boolean value expected, got {v}")
+    elif isinstance(v, str):
+        v_low = v.lower()
+        if v_low in ('yes', 'true', 't', 'y', '1', '1.0'):
+            return True
+        elif v_low in ('no', 'false', 'f', 'n', '0', '0.0'):
+            return False
+    raise ValueError(f"{v} is not convertible to boolean!")
