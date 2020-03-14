@@ -42,7 +42,6 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest tests
   deploy:
     docker:
       - image: circleci/python:3.7
