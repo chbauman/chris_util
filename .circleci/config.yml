@@ -34,12 +34,14 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install pytest
-            pytest tests
+            pip install pytest black            
       - run:
-          name: run tests
+          name: format and run tests
           command: |
             . venv/bin/activate
+            black emeki
+            black tests
+            pytest tests
   deploy:
     docker:
       - image: circleci/python:3.7
