@@ -1,27 +1,56 @@
 version: 2.1
-
-orbs:
-  python: circleci/python@0.2.1
-
+workflows:
+  build_and_deploy:
+    jobs:
+      - test:
+          name: "test_35"
+          version: "3.5"
+      - test:
+          name: "test_36"
+          version: "3.6"
+      - test:
+          name: "test_37"
+          version: "3.7"
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test_37
+          filters:
+            tags:
+              only: /[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
 jobs:
-  build-and-test:
-    executor: python/default
+  test:
+    parameters:
+      version:
+        type: string
+        default: latest
+    docker:
+      - image: circleci/python:<< parameters.version >>
     steps:
       - checkout
       - run:
-        name: install python dependencies
-        command: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install pytest-cov
+          name: install python dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install pytest
       - run:
-        name: run tests
-        command: |
-          . venv/bin/activate
-          pytest tests
-          
-
-workflows:
-  main:
-    jobs:
-      - build-and-test
+          name: run tests
+          command: |
+            . venv/bin/activate
+            pytest tests
+  deploy:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: install python dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install twine wheel
