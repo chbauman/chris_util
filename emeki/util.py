@@ -1,4 +1,7 @@
-print("Hi")
+"""The util module.
+
+This module provides some utility functionality.
+"""
 
 
 def str2bool(v) -> bool:
@@ -15,9 +18,3 @@ def str2bool(v) -> bool:
         return False
     else:
         raise ValueError(f"Boolean value expected, got {v}")
-
-
-class Dummy:
-
-    def hi(self):
-        print("Hi")

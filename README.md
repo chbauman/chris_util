@@ -1,3 +1,8 @@
-# chris-util
+# emeki
 
-This is my utility package.
+This is my first python package published on PyPI.
+Install as follows.
+
+```
+$ pip install emeki
+```
