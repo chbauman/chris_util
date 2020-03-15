@@ -22,4 +22,8 @@ def str2bool(v) -> bool:
 
 
 def emeki_main():
+    """The main function.
+
+    It may be called directly from the command line when
+    typing `emeki`."""
     print("Hoi! This is my personal python library.")

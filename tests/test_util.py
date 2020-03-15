@@ -1,6 +1,7 @@
 import pytest
 from unittest import TestCase
 
+from emeki.testing import AssertPrints
 from emeki.util import str2bool, emeki_main
 
 
@@ -20,5 +21,9 @@ class TestUtil(TestCase):
 
     def test_emeki(self):
         emeki_main()
+
+    def test_test_print(self):
+        with AssertPrints("Hi"):
+            print("Hi")
 
     pass

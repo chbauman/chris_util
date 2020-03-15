@@ -19,6 +19,7 @@ abort_failure
 venv/Scripts/activate.ps1
 pip install pytest
 pytest ./tests
+# pytest --cov=emeki ./tests
 abort_failure
 deactivate
 
