@@ -7,8 +7,12 @@ Function abort_failure {
     }
 }
 
-# Check formatting
+# Check formatting and style
 black --check .
+abort_failure
+flake8 emeki --max-line-length=90
+abort_failure
+flake8 tests --max-line-length=90
 abort_failure
 
 # Run tests
