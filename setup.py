@@ -3,9 +3,8 @@ import setuptools
 with open("README.md") as f:
     long_description = f.read()
 
-with open("version.txt", "r", encoding='utf8') as f:
+with open("version.txt", "r", encoding="utf8") as f:
     v_num = f.read().strip()
-    print(f"'{v_num}'")
 
 setuptools.setup(
     name="emeki",

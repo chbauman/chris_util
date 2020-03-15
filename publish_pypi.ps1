@@ -8,9 +8,7 @@ Function abort_failure {
 }
 
 # Check formatting
-black --check emeki
-abort_failure
-black --check tests
+black --check .
 abort_failure
 
 # Run tests
