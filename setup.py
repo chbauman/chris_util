@@ -25,4 +25,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Topic :: Utilities",
     ],
+    entry_points={"console_scripts": ["emeki=emeki.util:emeki_main"],},
 )

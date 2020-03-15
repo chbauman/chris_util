@@ -1,7 +1,7 @@
 import pytest
 from unittest import TestCase
 
-from emeki.util import str2bool
+from emeki.util import str2bool, emeki_main
 
 
 @pytest.mark.parametrize("str_in, output", [("t", True), ("0", False), (True, True)])
@@ -17,5 +17,8 @@ class TestUtil(TestCase):
     def test_str_to_bool_ex(self):
         with self.assertRaises(ValueError):
             str2bool(2)
+
+    def test_emeki(self):
+        emeki_main()
 
     pass

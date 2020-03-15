@@ -19,3 +19,7 @@ def str2bool(v) -> bool:
         elif v_low in ("no", "false", "f", "n", "0", "0.0"):
             return False
     raise ValueError(f"{v} is not convertible to boolean!")
+
+
+def emeki_main():
+    print("Hoi! This is my personal python library.")
