@@ -5,7 +5,8 @@ param(
 [switch]$format = $false,
 [switch]$clean = $false,
 [switch]$test = $false,
-[switch]$pub = $false)
+[switch]$pub = $false,
+[switch]$h = $false)
 
 
 # Builds the documentation. Use `rebuild` = true, if a module has been
@@ -83,6 +84,9 @@ function clean {
 }
 
 # Do the actual stuff
+if ($h) {
+    Get-Help .\make.ps1
+}
 if ($docs) {
     make_docs(-Not $no_rebuild)
 }
