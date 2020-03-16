@@ -32,5 +32,5 @@ def main():
         f.write(d1 + s_ind + "\n\n" + "".join(add_str) + "   " + d2.lstrip())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
