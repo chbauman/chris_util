@@ -5,8 +5,9 @@ emeki.egg-info
 dist 
 build
 
+docs/sphinx/*
+
 *__pycache__*
 *.pyc
 *.coverage
-.idea/dataSources.xml
 .idea/dataSources.xml
