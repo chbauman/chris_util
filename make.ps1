@@ -4,6 +4,7 @@ param(
 [switch]$no_rebuild = $false,
 [switch]$format = $false,
 [switch]$clean = $false,
+[switch]$test = $false,
 [switch]$pub = $false)
 
 
@@ -31,6 +32,13 @@ function abort_failure {
         Write-Host("ERROR: Publishing failed!")
         Break
     }
+}
+
+# Runs the tests using pytest
+function run_tests {
+    venv/Scripts/activate.ps1
+    pytest ./tests
+    deactivate
 }
 
 # Publish changes to PyPI. Checks if the tests are run successfully
@@ -88,4 +96,7 @@ if ($format) {
 }
 if ($clean) {
     clean
+}
+if ($test) {
+    run_tests
 }
