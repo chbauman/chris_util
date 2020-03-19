@@ -6,7 +6,6 @@ import pytest
 from emeki.project_setup import DATA_DIR
 from emeki.testing import AssertPrints
 from emeki.util import str2bool, create_dir, zip_dir, unzip_to, empty_dir
-from emeki.main import emeki_main
 from tests.project_test import TEST_DATA_DIR
 
 
