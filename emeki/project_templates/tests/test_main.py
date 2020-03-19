@@ -1,7 +1,7 @@
 """This files contains the tests for `main.py`."""
 from unittest import TestCase
 
-from PROJECT_NAME.main import main
+from PROJECT_NAME_UNS.main import main
 
 
 def test_main():
