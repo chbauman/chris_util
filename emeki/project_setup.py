@@ -5,7 +5,7 @@ import datetime
 
 from pkg_resources import resource_filename
 
-from emeki.util import create_dir, zip_dir, unzip_to
+from emeki.util import create_dir, zip_dir, unzip_to, str2bool, empty_dir
 
 DATA_DIR = os.path.join(Path(__file__).parent, "template", "project_templates")
 ZIP_F_NAME = resource_filename(__name__, f"template/template.zip")
@@ -116,12 +116,29 @@ def setup_project_UI() -> bool:
     author = input("Author of the project: ")
     project_name = input("Name of the project: ")
     tar_dir = input("Where to put the files? ")
-    if not os.path.isdir(tar_dir):
-        print(f"Invalid directory: '{tar_dir}'")
-        return False
     if " " in project_name:
         print(f"Project name: '{project_name}' cannot contain whitespaces!")
         return False
+    if not os.path.isdir(tar_dir):
+        print(f"Invalid directory: '{tar_dir}'")
+        return False
+    else:
+        if len(os.listdir(tar_dir)) != 0:
+            print(os.listdir(tar_dir))
+            msg = "Specified folder is not empty, want to remove contents? (y/ n)"
+            inp = input(msg)
+            try:
+                remove_contents = str2bool(inp)
+                if remove_contents:
+                    print("Removing contents of folder.")
+                    empty_dir(tar_dir)
+                else:
+                    print("Aborting")
+                    return False
+            except ValueError:
+                print(f"Answer '{inp}' not understood :(")
+                return False
+        pass
     setup_project_zipped(tar_dir, project_name, author)
     print("Setup successful :)")
     return True

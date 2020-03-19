@@ -12,12 +12,20 @@ def emeki_main():
 
     print("Hoi! This is my personal python library.")
 
+    # Parse arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("--init_pro", help="initialize project", action="store_true")
     args = parser.parse_args(sys.argv[1:])
+
+    # Setup base project
     if args.init_pro:
         setup_project_UI()
 
 
-if __name__ == "__main__":
-    emeki_main()
+def execute():
+    """Calls `emeki_main` if module is called directly."""
+    if __name__ == "__main__":
+        sys.exit(emeki_main())
+
+
+execute()

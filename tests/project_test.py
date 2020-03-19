@@ -49,7 +49,13 @@ class TestProject(TestCase):
     def test_user_project_success(self):
         target_dir = os.path.join(TEST_DATA_DIR, "project_test_data")
         create_dir(target_dir)
-        with InputMock(["   ", "project-name", target_dir]):
+        with open(os.path.join(target_dir, "hoi.txt"), "w") as f:
+            f.write("hoi")
+        with InputMock(["   ", "project-name", target_dir, "blah"]):
+            assert not setup_project_UI()
+        with InputMock(["   ", "project-name", target_dir, "n"]):
+            assert not setup_project_UI()
+        with InputMock(["   ", "project-name", target_dir, "y"]):
             assert setup_project_UI()
 
     pass
