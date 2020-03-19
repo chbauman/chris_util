@@ -73,9 +73,7 @@ function publish_to_pypi {
     abort_failure
     flake8 tests --max-line-length=90
     abort_failure
-    flake8 lib --max-line-length=90
-    abort_failure
-    flake8 story_time.py --max-line-length=90
+    flake8 emeki --max-line-length=90 --exclude emeki/template
     abort_failure
 
     # Run tests
