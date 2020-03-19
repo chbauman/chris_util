@@ -11,6 +11,18 @@ ZIP_F_NAME = os.path.join(Path(DATA_DIR).parent, "template.zip")
 Rule_T = List[Tuple[str, str]]
 
 
+ALLOWED_EXT = [
+    "py",
+    "in",
+    "txt",
+    "rst",
+    "md",
+    "gitignore",
+    "LICENSE",
+    "ps1",
+]
+
+
 def repl_in_str(s: str, rep_rules: Rule_T) -> str:
     """Applies a series of replacements to a string."""
     contents = s
@@ -44,7 +56,7 @@ def copy_and_modify_recursive(
             next_target_dir = os.path.join(curr_target_dir, f_mod)
             copy_and_modify_recursive(f_path, next_target_dir, rep_rule)
     else:
-        if curr_path.split(".")[-1] in ["py", "in", "txt", "rst", "md", "gitignore", "LICENSE", "ps1"]:
+        if curr_path.split(".")[-1] in ALLOWED_EXT:
             # print(curr_path)
             repl_in_file(curr_path, curr_target_dir, rep_rule)
             # TODO: Include images, but copy only!
@@ -60,10 +72,8 @@ def modify_recursively(curr_path: str, rep_rule: Rule_T) -> None:
             os.rename(f_path, f_path_mod)
             modify_recursively(f_path_mod, rep_rule)
     else:
-        if curr_path.split(".")[-1] in ["py", "in", "txt", "rst", "md", "gitignore", "LICENSE", "ps1"]:
-            # print(curr_path)
+        if curr_path.split(".")[-1] in ALLOWED_EXT:
             repl_in_file(curr_path, curr_path, rep_rule)
-            # TODO: Include images, but copy only!
 
 
 def create_rules(project_name: str, author: str) -> Rule_T:
@@ -80,6 +90,7 @@ def create_rules(project_name: str, author: str) -> Rule_T:
 
 def setup_project(target_dir: str, project_name: str, author: str):
     """Sets up a sample project."""
+    print("This is deprecated!")
     rep_rules = create_rules(project_name, author)
     copy_and_modify_recursive(DATA_DIR, target_dir, rep_rules)
 

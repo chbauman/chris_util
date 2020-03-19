@@ -46,12 +46,12 @@ def zip_dir(dir_path: str, save_path: str):
     """Zips and saves a directory."""
     assert save_path[-4:] == ".zip"
     path_no_zip = save_path[:-4]
-    shutil.make_archive(path_no_zip, 'zip', dir_path)
+    shutil.make_archive(path_no_zip, "zip", dir_path)
 
 
 def unzip_to(file_to_unzip: str, dest_dir: str):
     """Extract all the contents of zip file in `dest_dir`."""
-    with zipfile.ZipFile(file_to_unzip, 'r') as zipObj:
+    with zipfile.ZipFile(file_to_unzip, "r") as zipObj:
         zipObj.extractall(dest_dir)
 
 
