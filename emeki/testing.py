@@ -2,13 +2,13 @@
 
 """
 import builtins
-from typing import List, Union
+from typing import List, Union, Callable
 
 
 class AssertPrints:
     """Checks if `print` is called with the specified arguments.
 
-    Does not capture stdout output."""
+    Does not capture general stdout output."""
 
     print_list: List[str] = []
     exp_print: List[str]
@@ -47,7 +47,8 @@ class InputMock:
     """
 
     count: int = 0
-    orig_inp = None
+    orig_inp: Callable = None
+    input_list: List
 
     def __init__(self, input_list):
         self.input_list = input_list
