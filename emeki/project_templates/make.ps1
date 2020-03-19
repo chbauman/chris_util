@@ -99,12 +99,12 @@ function publish_to_pypi {
 
 # Cleans up some files
 function clean {
-    Remove-Item sphinx -Force -Recurse -ErrorAction Ignore
+    Remove-Item docs/sphinx -Force -Recurse -ErrorAction Ignore
     Remove-Item htmlcov -Force -Recurse -ErrorAction Ignore
     Remove-Item .coverage -Force -Recurse -ErrorAction Ignore
     Remove-Item Info.txt -Recurse -ErrorAction Ignore
     Remove-Item .pytest_cache -Force -Recurse -ErrorAction Ignore
-    Remove-Item *__pycache__* -Force -Recurse -ErrorAction Ignore
+    get-childitem -Include *__pycache__* -Recurse -force | Remove-Item -Force -Recurse
     Remove-Item dist -Recurse -ErrorAction Ignore
     Remove-Item build -Recurse -ErrorAction Ignore
     Remove-Item *.egg-info -Recurse -ErrorAction Ignore

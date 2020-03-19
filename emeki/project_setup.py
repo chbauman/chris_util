@@ -31,7 +31,9 @@ def repl_in_file(file_path: str, dest_path: str, rep_rules: Rule_T) -> None:
         f.write(contents)
 
 
-def copy_and_modify_recursive(curr_path: str, curr_target_dir: str, rep_rule: Rule_T) -> None:
+def copy_and_modify_recursive(
+    curr_path: str, curr_target_dir: str, rep_rule: Rule_T
+) -> None:
     """Copies a folder recursively and applies renaming."""
     if os.path.isdir(curr_path):
         create_dir(curr_target_dir)
@@ -41,8 +43,10 @@ def copy_and_modify_recursive(curr_path: str, curr_target_dir: str, rep_rule: Ru
             next_target_dir = os.path.join(curr_target_dir, f_mod)
             copy_and_modify_recursive(f_path, next_target_dir, rep_rule)
     else:
-        if curr_path.split(".")[-1] not in ["jpg"]:
+        if curr_path.split(".")[-1] in ["py", "in", "txt", "rst", "md", "gitignore", "LICENSE", "ps1"]:
+            # print(curr_path)
             repl_in_file(curr_path, curr_target_dir, rep_rule)
+            # TODO: Include images, but copy only!
 
 
 def setup_project(target_dir: str, project_name: str, author: str):

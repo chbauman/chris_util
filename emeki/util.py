@@ -3,6 +3,8 @@
 This module provides some utility functionality.
 """
 import os
+import shutil
+import zipfile
 
 
 def str2bool(v) -> bool:
@@ -28,6 +30,17 @@ def create_dir(dir_name: str) -> None:
     if not os.path.exists(dir_name):
         os.makedirs(dir_name)
     return
+
+
+def zip_dir(dir_path: str, save_path: str):
+    """Zips and saves a directory."""
+    shutil.make_archive(save_path, 'zip', dir_path)
+
+
+def unzip_to(file_to_unzip: str, dest_dir: str):
+    """Extract all the contents of zip file in `dest_dir`."""
+    with zipfile.ZipFile(file_to_unzip, 'r') as zipObj:
+        zipObj.extractall(dest_dir)
 
 
 def emeki_main():

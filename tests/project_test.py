@@ -18,7 +18,6 @@ class TestTesting(TestCase):
         try:
             setup_project(target_dir, "test-project", "emeki")
         finally:
-            pass
-            # shutil.rmtree(target_dir)
+            shutil.rmtree(target_dir)
 
     pass
