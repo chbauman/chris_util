@@ -57,7 +57,7 @@ def copy_and_modify_recursive(
             copy_and_modify_recursive(f_path, next_target_dir, rep_rule)
     else:
         if curr_path.split(".")[-1] in ALLOWED_EXT:
-            # print(curr_path)
+            print(curr_path)
             repl_in_file(curr_path, curr_target_dir, rep_rule)
             # TODO: Include images, but copy only!
 
@@ -73,6 +73,7 @@ def modify_recursively(curr_path: str, rep_rule: Rule_T) -> None:
             modify_recursively(f_path_mod, rep_rule)
     else:
         if curr_path.split(".")[-1] in ALLOWED_EXT:
+            print(curr_path)
             repl_in_file(curr_path, curr_path, rep_rule)
 
 

@@ -20,14 +20,14 @@ class TestTesting(TestCase):
         finally:
             shutil.rmtree(target_dir)
 
-    # def test_project_creation_zip(self):
-    #     target_dir = os.path.join(TEST_DATA_DIR, "project_test_data_zip")
-    #     create_dir(target_dir)
-    #
-    #     try:
-    #         zip_template()
-    #         setup_project_zipped(target_dir, "test-project", "emeki")
-    #     finally:
-    #         shutil.rmtree(target_dir)
+    def test_project_creation_zip(self):
+        target_dir = os.path.join(TEST_DATA_DIR, "project_test_data_zip")
+        create_dir(target_dir)
+
+        try:
+            zip_template()
+            setup_project_zipped(target_dir, "test-project", "emeki")
+        finally:
+            shutil.rmtree(target_dir)
 
     pass
