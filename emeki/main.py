@@ -12,9 +12,11 @@ def emeki_main():
 
     print("Hoi! This is my personal python library.")
 
-    # Parse arguments
+    # Define argument parser
     parser = argparse.ArgumentParser()
     parser.add_argument("--init_pro", help="initialize project", action="store_true")
+
+    # Parse arguments
     args = parser.parse_args(sys.argv[1:])
 
     # Setup base project
