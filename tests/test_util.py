@@ -5,7 +5,8 @@ import pytest
 
 from emeki.project_setup import DATA_DIR
 from emeki.testing import AssertPrints
-from emeki.util import str2bool, emeki_main, create_dir, zip_dir, unzip_to, empty_dir
+from emeki.util import str2bool, create_dir, zip_dir, unzip_to, empty_dir
+from emeki.main import emeki_main
 from tests.project_test import TEST_DATA_DIR
 
 
@@ -22,9 +23,6 @@ class TestUtil(TestCase):
     def test_str_to_bool_ex(self):
         with self.assertRaises(ValueError):
             str2bool(2)
-
-    def test_emeki(self):
-        emeki_main()
 
     def test_create_dir(self):
         dir_name = "Test_dir"

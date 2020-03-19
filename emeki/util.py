@@ -53,11 +53,3 @@ def unzip_to(file_to_unzip: str, dest_dir: str):
     """Extract all the contents of zip file in `dest_dir`."""
     with zipfile.ZipFile(file_to_unzip, "r") as zipObj:
         zipObj.extractall(dest_dir)
-
-
-def emeki_main():
-    """The main function.
-
-    It may be called directly from the command line when
-    typing `emeki`."""
-    print("Hoi! This is my personal python library.")

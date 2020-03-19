@@ -3,10 +3,12 @@ from pathlib import Path
 from typing import List, Tuple
 import datetime
 
+from pkg_resources import resource_filename
+
 from emeki.util import create_dir, zip_dir, unzip_to
 
 DATA_DIR = os.path.join(Path(__file__).parent, "template", "project_templates")
-ZIP_F_NAME = os.path.join(Path(DATA_DIR).parent, "template.zip")
+ZIP_F_NAME = resource_filename(__name__, f"template/template.zip")
 
 Rule_T = List[Tuple[str, str]]
 
@@ -89,20 +91,37 @@ def create_rules(project_name: str, author: str) -> Rule_T:
     return rep_rules
 
 
-def setup_project(target_dir: str, project_name: str, author: str):
+def setup_project(target_dir: str, project_name: str, author: str) -> None:
     """Sets up a sample project."""
     print("This is deprecated!")
     rep_rules = create_rules(project_name, author)
     copy_and_modify_recursive(DATA_DIR, target_dir, rep_rules)
 
 
-def zip_template():
+def zip_template() -> None:
     """Zips the template."""
     zip_dir(DATA_DIR, ZIP_F_NAME)
 
 
-def setup_project_zipped(target_dir: str, project_name: str, author: str):
+def setup_project_zipped(target_dir: str, project_name: str, author: str) -> None:
     """Sets up a sample project."""
     rep_rules = create_rules(project_name, author)
     unzip_to(ZIP_F_NAME, target_dir)
     modify_recursively(target_dir, rep_rules)
+
+
+def setup_project_UI() -> bool:
+    """Asks the user for info and builds the project."""
+    print("Setting up a basic project structure.")
+    author = input("Author of the project: ")
+    project_name = input("Name of the project: ")
+    tar_dir = input("Where to put the files? ")
+    if not os.path.isdir(tar_dir):
+        print(f"Invalid directory: '{tar_dir}'")
+        return False
+    if " " in project_name:
+        print(f"Project name: '{project_name}' cannot contain whitespaces!")
+        return False
+    setup_project_zipped(tar_dir, project_name, author)
+    print("Setup successful :)")
+    return True

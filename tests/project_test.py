@@ -1,15 +1,21 @@
 import os
 import shutil
 from pathlib import Path
-from unittest import TestCase
+from unittest import TestCase, mock
 
-from emeki.project_setup import setup_project, setup_project_zipped, zip_template
+from emeki.project_setup import (
+    setup_project,
+    setup_project_zipped,
+    zip_template,
+    setup_project_UI,
+)
+from emeki.testing import InputMock
 from emeki.util import create_dir
 
 TEST_DATA_DIR = os.path.join(Path(__file__).parent, "test_data")
 
 
-class TestTesting(TestCase):
+class TestProject(TestCase):
     def test_project_creation(self):
 
         target_dir = os.path.join(TEST_DATA_DIR, "project_test_data")
@@ -29,5 +35,21 @@ class TestTesting(TestCase):
             setup_project_zipped(target_dir, "test-project", "emeki")
         finally:
             shutil.rmtree(target_dir)
+
+    def test_user_project(self):
+        target_dir = os.path.join(TEST_DATA_DIR, "project_test_data")
+        create_dir(target_dir)
+
+        with mock.patch("builtins.input", return_value="invalid_path"):
+            assert not setup_project_UI()
+
+        with InputMock(["   ", "  ", target_dir]):
+            assert not setup_project_UI()
+
+    def test_user_project_success(self):
+        target_dir = os.path.join(TEST_DATA_DIR, "project_test_data")
+        create_dir(target_dir)
+        with InputMock(["   ", "project-name", target_dir]):
+            assert setup_project_UI()
 
     pass

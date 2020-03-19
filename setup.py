@@ -11,6 +11,8 @@ setuptools.setup(
     version=v_num,
     description="Test",
     packages=setuptools.find_packages(exclude=["docs", "tests"]),
+    include_package_data=True,
+    package_data={"emeki": ["*.zip"],},
     url="https://github.com/chbauman/emeki",
     author="Christian Baumann",
     author_email="chris.python.notifyer@gmail.com",
@@ -25,5 +27,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Topic :: Utilities",
     ],
-    entry_points={"console_scripts": ["emeki=emeki.util:emeki_main"],},
+    entry_points={"console_scripts": ["emeki=emeki.main:emeki_main"],},
 )

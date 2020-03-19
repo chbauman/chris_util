@@ -37,3 +37,29 @@ class AssertPrints:
             builtins.print = self.old_print
 
     pass
+
+
+class InputMock:
+    """Mocks the `input()` function.
+
+    The return values for consecutive calls are
+    specified in `input_list`.
+    """
+
+    count: int = 0
+    orig_inp = None
+
+    def __init__(self, input_list):
+        self.input_list = input_list
+
+    def __enter__(self):
+        self.orig_inp = builtins.input
+        builtins.input = self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        builtins.input = self.orig_inp
+
+    def __call__(self, *args, **kwargs):
+        ret_val = self.input_list[self.count]
+        self.count += 1
+        return ret_val
