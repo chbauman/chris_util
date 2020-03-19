@@ -32,9 +32,21 @@ def create_dir(dir_name: str) -> None:
     return
 
 
+def empty_dir(dir_name: str) -> None:
+    """Removes the content of the specified directory."""
+    for f in os.listdir(dir_name):
+        f_path = os.path.join(dir_name, f)
+        if os.path.isdir(f_path):
+            shutil.rmtree(f_path)
+        else:
+            os.remove(f_path)
+
+
 def zip_dir(dir_path: str, save_path: str):
     """Zips and saves a directory."""
-    shutil.make_archive(save_path, 'zip', dir_path)
+    assert save_path[-4:] == ".zip"
+    path_no_zip = save_path[:-4]
+    shutil.make_archive(path_no_zip, 'zip', dir_path)
 
 
 def unzip_to(file_to_unzip: str, dest_dir: str):

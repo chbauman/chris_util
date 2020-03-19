@@ -1,13 +1,11 @@
 import os
-import shutil
-from pathlib import Path
+from unittest import TestCase
 
 import pytest
-from unittest import TestCase
 
 from emeki.project_setup import DATA_DIR
 from emeki.testing import AssertPrints
-from emeki.util import str2bool, emeki_main, create_dir, zip_dir, unzip_to
+from emeki.util import str2bool, emeki_main, create_dir, zip_dir, unzip_to, empty_dir
 from tests.project_test import TEST_DATA_DIR
 
 
@@ -38,12 +36,12 @@ class TestUtil(TestCase):
 
     def test_zipping(self):
         try:
-            out_name = os.path.join(TEST_DATA_DIR, "test")
+            out_name = os.path.join(TEST_DATA_DIR, "test.zip")
             zip_dir(DATA_DIR, out_name)
             unzip_dir = os.path.join(TEST_DATA_DIR, "test2")
-            unzip_to(out_name + ".zip", unzip_dir)
+            unzip_to(out_name, unzip_dir)
         finally:
-            shutil.rmtree(TEST_DATA_DIR)
+            empty_dir(TEST_DATA_DIR)
 
 
 class TestTesting(TestCase):
