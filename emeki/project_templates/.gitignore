@@ -1,0 +1,17 @@
+__pycache__
+.vs
+*.pyproj
+*.sln
+
+venv/*
+
+.coverage
+htmlcov
+
+tests/test_data/*
+
+docs/sphinx
+
+dist/*
+build/*
+*.egg-info/*

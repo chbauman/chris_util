@@ -1,8 +1,10 @@
+import os
+
 import pytest
 from unittest import TestCase
 
 from emeki.testing import AssertPrints
-from emeki.util import str2bool, emeki_main
+from emeki.util import str2bool, emeki_main, create_dir
 
 
 @pytest.mark.parametrize("str_in, output", [("t", True), ("0", False), (True, True)])
@@ -22,6 +24,16 @@ class TestUtil(TestCase):
     def test_emeki(self):
         emeki_main()
 
+    def test_create_dir(self):
+        dir_name = "Test_dir"
+        try:
+            create_dir(dir_name)
+            assert os.path.isdir(dir_name)
+        finally:
+            os.removedirs(dir_name)
+
+
+class TestTesting(TestCase):
     def test_test_print(self):
         with AssertPrints("Hi"):
             print("Hi")

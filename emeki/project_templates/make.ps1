@@ -20,7 +20,7 @@ function make_docs ($rebuild = $true) {
         Remove-Item sphinx -Force -Recurse -ErrorAction Ignore
         mkdir sphinx
         Set-Location sphinx
-        sphinx-apidoc -F -H 'Emeki' -A 'Chris' -o . '../../' "../../setup.py"
+        sphinx-apidoc -F -H 'PROJECT_NAME' -A 'AUTHOR' -o . '../../' "../../setup.py"
         Copy-Item ../conf.py .
         Set-Location ..
         python doc_helper.py
@@ -38,10 +38,10 @@ function abort_failure {
     }
 }
 
-# Runs the tests using pytest
+# Runs the main function
 function run{
     activate_env
-    python .\story_time\main.py
+    python .\PROJECT_NAME_UNS\main.py
 }
 
 # Runs the tests using pytest
@@ -53,7 +53,7 @@ function activate_env {
 # Runs the tests using pytest
 function run_tests ($abort = $false) {
     activate_env
-    pytest tests --cov=emeki --cov-report html -v
+    pytest tests --cov=PROJECT_NAME_UNS --cov-report html -v
     if ($abort){
         abort_failure
     }
@@ -73,9 +73,7 @@ function publish_to_pypi {
     abort_failure
     flake8 tests --max-line-length=90
     abort_failure
-    flake8 lib --max-line-length=90
-    abort_failure
-    flake8 story_time.py --max-line-length=90
+    flake8 PROJECT_NAME_UNS --max-line-length=90
     abort_failure
 
     # Run tests
@@ -90,7 +88,7 @@ function publish_to_pypi {
 
     # Upload to PyPI
     python setup.py sdist bdist_wheel
-    $username = "chbauman"
+    $username = "pypi_username"
     $pw = (keyring get https://upload.pypi.org/legacy/ $username) | Out-String
     if($to_pypi){
         twine upload dist/* -u $username -p $pw.Trim()
@@ -101,11 +99,12 @@ function publish_to_pypi {
 
 # Cleans up some files
 function clean {
-    Remove-Item build -Force -Recurse -ErrorAction Ignore
-    Remove-Item dist -Force -Recurse -ErrorAction Ignore
-    Remove-Item emeki.egg-info -Force -Recurse -ErrorAction Ignore
+    Remove-Item Info.txt -Recurse -ErrorAction Ignore
+    Remove-Item .pytest_cache -Force -Recurse -ErrorAction Ignore
     Remove-Item *__pycache__* -Force -Recurse -ErrorAction Ignore
-    Remove-Item docs/sphinx -Force -Recurse -ErrorAction Ignore
+    Remove-Item dist -Recurse -ErrorAction Ignore
+    Remove-Item build -Recurse -ErrorAction Ignore
+    Remove-Item *.egg-info -Recurse -ErrorAction Ignore
 }
 
 # Do the actual stuff
@@ -124,7 +123,7 @@ if ($pub) {
 if ($format) {
     black .
     flake8 tests --max-line-length=90
-    flake8 emeki --max-line-length=90
+    flake8 PROJECT_NAME_UNS --max-line-length=90
 }
 if ($clean) {
     clean

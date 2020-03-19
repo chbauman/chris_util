@@ -2,6 +2,7 @@
 
 This module provides some utility functionality.
 """
+import os
 
 
 def str2bool(v) -> bool:
@@ -19,6 +20,14 @@ def str2bool(v) -> bool:
         elif v_low in ("no", "false", "f", "n", "0", "0.0"):
             return False
     raise ValueError(f"{v} is not convertible to boolean!")
+
+
+def create_dir(dir_name: str) -> None:
+    """Creates the given directory recursively.
+    """
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
+    return
 
 
 def emeki_main():

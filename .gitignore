@@ -1,7 +1,7 @@
 
 venv
 venv_test
-emeki.egg-info
+*.egg-info
 dist 
 build
 
@@ -9,5 +9,8 @@ docs/sphinx/*
 
 *__pycache__*
 *.pyc
+.idea
+
+htmlcov
 *.coverage
-.idea/dataSources.xml
+
