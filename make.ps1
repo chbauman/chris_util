@@ -120,7 +120,7 @@ if ($pub) {
     publish_to_pypi
 }
 if ($format) {
-    black .
+    black .  --exclude venv
     flake8 tests --max-line-length=90
     flake8 emeki --max-line-length=90
 }

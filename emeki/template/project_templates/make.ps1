@@ -69,7 +69,7 @@ function publish_to_pypi {
     Remove-Item *.egg-info -Recurse -ErrorAction Ignore
 
     # Check formatting and style
-    black --check .
+    black --check . --exclude venv
     abort_failure
     flake8 tests --max-line-length=90
     abort_failure
@@ -124,7 +124,7 @@ if ($pub) {
     publish_to_pypi
 }
 if ($format) {
-    black .
+    black . --exclude venv
     flake8 tests --max-line-length=90
     flake8 PROJECT_NAME_UNS --max-line-length=90
 }
