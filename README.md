@@ -50,7 +50,7 @@ print(b)
 
 ## TODO
 
-Some changes that are planned to be implemented:
+Some changes that are planned to be implemented in the future:
 
 - Fix deprecation warning for project creation
 - Inlcude PyPI username specification during setup (and password saving?)
