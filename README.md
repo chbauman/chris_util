@@ -48,4 +48,11 @@ b = str2bool("true")
 print(b)
 ```
 
+## TODO
+
+Some changes that are planned to be implemented:
+
+- Fix deprecation warning for project creation
+- Inlcude PyPI username specification during setup (and password saving?)
+
 [![CircleCI](https://circleci.com/gh/chbauman/emeki.svg?style=svg)](https://circleci.com/gh/chbauman/emeki)
