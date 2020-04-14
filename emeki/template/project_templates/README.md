@@ -1,2 +1,2 @@
-# StoryTime
-Diary-like GUI written in python.
+# PROJECT_NAME
+Description goes here.

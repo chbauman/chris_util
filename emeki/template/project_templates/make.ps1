@@ -9,6 +9,7 @@ param(
 [switch]$test = $false,
 [switch]$pub = $false,
 [switch]$to_pypi = $false,
+[switch]$install = $false,
 [switch]$h = $false)
 
 
@@ -44,11 +45,17 @@ function run{
     python .\PROJECT_NAME_UNS\main.py
 }
 
-# Runs the tests using pytest
+# Activate the virtual env
 function activate_env {
     venv/Scripts/activate.ps1
 }
 
+# Sets up the virtual env and installes required libraries
+function setup_venv{
+    python -m venv venv
+    activate_env
+    pip install black flake8 pytest-cov sphinx sphinx-rtd-theme sphinx_autodoc_typehints sphinx-argparse setuptools wheel
+}
 
 # Runs the tests using pytest
 function run_tests ($abort = $false) {
@@ -136,4 +143,7 @@ if ($act) {
 }
 if ($test) {
     run_tests
+}
+if ($install) {
+    setup_venv
 }

@@ -9,6 +9,7 @@ param(
 [switch]$test = $false,
 [switch]$pub = $false,
 [switch]$to_pypi = $false,
+[switch]$install = $false,
 [switch]$h = $false)
 
 
@@ -41,10 +42,17 @@ function abort_failure {
 # Runs the tests using pytest
 function run{
     activate_env
-    python .\story_time\main.py
+    python .\emeki\main.py
 }
 
-# Runs the tests using pytest
+# Sets up the virtual env and installes required libraries
+function setup_venv{
+    python -m venv venv
+    activate_env
+    pip install black flake8 pytest-cov sphinx sphinx-rtd-theme sphinx_autodoc_typehints sphinx-argparse setuptools wheel
+}
+
+# Activates the environment
 function activate_env {
     venv/Scripts/activate.ps1
 }
@@ -132,4 +140,7 @@ if ($act) {
 }
 if ($test) {
     run_tests
+}
+if ($install) {
+    setup_venv
 }
