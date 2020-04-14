@@ -50,11 +50,12 @@ function activate_env {
     venv/Scripts/activate.ps1
 }
 
-# Sets up the virtual env and installes required libraries
+# Sets up the virtual env and installs required libraries
 function setup_venv{
     python -m venv venv
     activate_env
-    pip install black flake8 pytest-cov sphinx sphinx-rtd-theme sphinx_autodoc_typehints sphinx-argparse setuptools wheel
+    pip install black flake8 pytest-cov sphinx sphinx-rtd-theme sphinx_autodoc_typehints sphinx-argparse setuptools wheel keyring
+    pip install -r requirements.txt
 }
 
 # Runs the tests using pytest
@@ -64,7 +65,6 @@ function run_tests ($abort = $false) {
     if ($abort){
         abort_failure
     }
-    deactivate
 }
 
 # Publish changes to PyPI. Checks if the tests are run successfully
@@ -86,6 +86,7 @@ function publish_to_pypi {
     # Run tests
     venv/Scripts/activate.ps1
     run_tests($true)
+    venv/Scripts/activate.ps1
 
     # Handle version
     $version = ((Get-Content -Path version.txt) | Out-String).Trim()
